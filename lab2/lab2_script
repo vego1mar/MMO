@@ -1,0 +1,55 @@
+[x,fval,exitflag,output] = fminbnd(@f1, 0, 2)
+disp(exp(23/8))
+fplot(@f1, [0, 2])
+grid on
+title('exp(2x^2 - 3x + 4)')
+xlabel('x')
+ylabel('y')
+hold on
+plot(0.7500, 17.7254, 'o')
+plot(3/4, exp(23/8), 'x')
+hold off
+
+
+[x,fval,exitflag,output] = fminbnd(@f3, (-3/2)*pi, (3/2)*pi)
+fplot(@f3_2, [-(3/2)*pi, (3/2)*pi])
+grid on
+title('g(x) = sin^3 cos x')
+xlabel('x')
+ylabel('y')
+hold on
+plot(6.6613e-16, -0.5958, 'o')
+plot(0, sin(1)^3, 'x')
+hold off
+
+
+[x,fval,exitflag,output] = fminsearch(@f4, [1, 1])
+[X,Y] = meshgrid(-2:0.2:2, -2:0.2:2);
+Z = -X.^2 + Y.^2;
+c = X;
+mesh(X,Y,Z,c)
+title('h(x,y) = -x^2 + y^2')
+hold on
+plot(1.5361, -1.4804, 'x')
+plot(0, 0, 'x')
+hold off
+
+
+A = [-2 -4 0; -3 -2 1];
+b = [-10; -2];
+x0 = [1/2, 1/2, pi/2];
+[x,fval,exitflag,output] = fmincon(@f5, x0, A, b);
+disp(x)
+[x,fval,exitflag,output] = fminunc(@f5, x0);
+disp(x)
+[X,Y] = meshgrid(-5:0.5:5);
+z = 0;
+Z = 2*X.^3 - 4*Y.^2 + (sin(z)).^2;
+surf(X,Y,Z)
+title('k(x,y,z=0) = 2x^3 - 4y^2 + sin^2 z')
+hold on
+plot(-1.8160, 4.8428, 'x')
+plot(-1.1529, 1.3697, 'o')
+hold off
+
+
