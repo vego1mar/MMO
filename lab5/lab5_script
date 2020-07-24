@@ -1,0 +1,75 @@
+
+[x,fval,exitflag,output] = fminbnd(@f12, -3, 0)
+f12(-0.2601)
+f12(-0.32)
+
+golden_sect(@f12, -2.99, 0, 10e-3)
+
+syms x;
+f_sym = 2 * exp(tan(-x^2-3*x+4));
+newton1d(@f12, f_sym, -2, 10e-6)
+
+fplot(@f12, [-50, 50])
+grid on
+title('2 exp(tan(-x^2-3x+4))');
+hold on
+plot(-0.2601, f12(-0.2601), 'rx')
+plot(-3.6524297678468404402475160035771, f12(-3.6524297678468404402475160035771), 'rx')
+hold off
+
+newton1d_plot(@f12, f_sym, -2, 10e-6)
+golden_sect_plot(@f12, -2.99, 0, 10e-3)
+
+
+[x,fval,exitflag,output] = fminbnd(@f13, -1, 1)
+golden_sect(@f13, -0.99, 1, 10e-3)
+syms x;
+f_sym = exp(cos(2*x));
+newton1d(@f13, f_sym, -1, 10e-6)
+
+fplot(@f13, [-50, 50])
+grid on
+title('-exp(cos(2x))');
+hold on
+plot(0, f13(0), 'rx')
+plot(1.2625e-07, f13(1.2625e-07), 'rx')
+plot(-1.1732370218271217380080745790566, f13(-1.1732370218271217380080745790566), 'rx')
+hold off
+
+syms x;
+f_sym = exp(cos(2*x));
+golden_sect_plot(@f13, -0.99, 1, 10e-3)
+newton1d_plot(@f13, f_sym, -1, 10e-6)
+
+
+[x,fval,exitflag,output] = fminbnd(@f14, -2, 1)
+golden_sect(@f14, -2, 1, 10e-4)
+syms x;
+f_sym = -5*x^5 + 3*x^4 -3*x^2 - 2;
+newton1d(@f14, f_sym, -2, 10e-6)
+
+fplot(@f14, [-50, 50])
+grid on
+title('-5x^5 + 3x^4 -3x^2 - 2');
+hold on
+plot(1.0000, f14(1.0000), 'rx')
+plot(0.9993, f14(0.9993), 'rx')
+plot(-1.5991735537190082644628099173554, f14(-1.5991735537190082644628099173554), 'rx')
+hold off
+
+syms x;
+f_sym = -5*x^5 + 3*x^4 -3*x^2 - 2;
+golden_sect_plot(@f14, -2, 1, 10e-4)
+newton1d_plot(@f14, f_sym, -2, 10e-6)
+
+
+syms x y;
+eqns = [x*(1+(pi/2))+(2*y) == 5, x*y+((pi/2)*(x^2)) == x*(y+(x/2))];
+expr = eliminate(eqns, x)
+fn_y = diff(expr)
+arg = solve([fn_y == 0])
+vpa(subs(expr, y, arg))
+
+
+
+
