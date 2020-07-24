@@ -1,0 +1,86 @@
+[x,fval,exitflag,output] = fminbnd(@f7, -1, 2);
+disp([x, fval])
+[x,fval,exitflag,output] = fminbnd(@f7, 0, 2);
+disp([x, fval])
+[x,fval,exitflag,output] = fminbnd(@f7, 1, 2);
+disp([x, fval])
+[x,fval,exitflag,output] = fminbnd(@f7, 2, 3);
+disp([x, fval])
+bisect(@f7, -1, 2, 10e-6);
+disp(ans)
+bisect(@f7, 0, 2, 10e-6);
+disp(ans)
+bisect(@f7, 1, 2, 10e-6);
+disp(ans)
+fplot(@f7, [-2, 4])
+grid on
+title('f(x) = 2*exp(sin(2x^2 - 3x + 4))')
+hold on
+plot(-0.2085, 0.7358, 'x')
+plot(1.7085, f7(1.7085), 'o')
+hold off
+bisect_plot(@f7, -1, 2, 10e-6);
+
+
+[x,fval,exitflag,output] = fminbnd(@f8, -2, 2);
+disp([x -fval])
+bisect(@f8, -2, 2, 10e-6);
+disp(ans)
+bisect(@f8, 0, 2, 10e-6);
+disp(ans)
+fplot(@f8, [-3, 3])
+grid on
+title('g(x) = sin(cos 2x)')
+hold on
+plot(0, -fval, 'rx')
+plot(0, f8(0), 'bx')
+hold off
+bisect_plot(@f8, -2, 2, 10e-6);
+
+
+[x,fval,exitflag,output] = fminbnd(@f9, -1, 1/2);
+disp([x fval])
+disp(output)
+bisect(@f9, -1, 1/2, 10e-6);
+disp([ans f9(ans)])
+fplot(@f9, [-1, 1/2])
+title('h(x) = -5x^5 + 3x^4 - 3x^2 - 2')
+hold on
+plot(x, fval, 'rx')
+plot(-0.4959, -2.4064, 'g^')
+hold off
+bisect_plot(@f9, -1, 1/2, 10e-6);
+
+
+[x,fval,exitflag,output] = fminbnd(@f10, 500, 501);
+disp(x)
+disp(fval)
+disp(output)
+xl = bisect(@f10, 500, 501, 10e-6);
+disp(xl)
+disp(f10(xl))
+fplot(@f10, [500, 501])
+title('p(a) = -(-2a^2 + 2002a)')
+hold on
+plot(x, fval, 'rx')
+plot(xl, f10(xl), 'g^')
+hold off
+bisect_plot2(@f10, 0, 501, 10e-6, 30);
+
+
+[x,fval,exitflag,output] = fminbnd(@f11, 500, 501);
+disp(x)
+disp(fval)
+disp(output)
+xl = bisect(@f11, 500, 501, 10e-6);
+disp(xl)
+disp(f11(xl))
+fplot(@f11, [500, 501])
+title('p(b) = -(-b^2 + 1001b)')
+hold on
+plot(x, fval, 'rx')
+plot(xl, f10(xl), 'g^')
+hold off
+bisect_plot2(@f11, 500, 501, 10e-6, 30);
+
+
