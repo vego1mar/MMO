@@ -1,0 +1,2 @@
+# MMO
+Matematyczne metody optymalizacji
