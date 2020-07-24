@@ -1,0 +1,62 @@
+lb = [0, -1];
+ub = [1, 0];
+x0 = (lb + ub) / 2;
+fmincon(@f6, x0, [], [], [], [], lb, ub)
+[X,Y] = meshgrid(-1:0.2:1);
+Z = 3*X.^4 - X.^2 + 2*Y.^2 - 2*X + Y;
+surf(X,Y,Z)
+hold on
+plot(0.6503, 0.25, 'ro')
+hold off
+title('f(x,y) = 3x^4 - x^2 + 2y^2 - 2x + y')
+
+
+ub = [1, 10];
+Aeq = [1, 1];
+beq = [0];
+x0 = ub / 2;
+fmincon(@f6, x0, [], [], Aeq, beq)
+[X,Y] = meshgrid(-2:0.2:2);
+Z = 3*X.^4 - X.^2 + 2*Y.^2 - 2*X + Y;
+surf(X,Y,Z)
+hold on
+plot(0.5424, -0.5424, 'ro')
+hold off
+title('f(x,y) = 3x^4 - x^2 + 2y^2 - 2x + y')
+
+
+A = [2 1];
+b = [0];
+x0 = A / 2;
+fmincon(@f6, x0, A, b, [], [], [], [], @f6_cons)
+[X,Y] = meshgrid(-1.5:0.3:1.5);
+Z = 3*X.^4 - X.^2 + 2*Y.^2 - 2*X + Y;
+surf(X,Y,Z)
+hold on
+plot(0.2690, -0.5380, 'ro')
+hold off
+title('f(x,y) = 3x^4 - x^2 + 2y^2 - 2x + y')
+
+
+x0 = [1/2, 1/2];
+fmincon(@f6, x0, [], [], [], [], [], [], @f6_cons2)
+[X,Y] = meshgrid(-1.5:0.3:1.5);
+Z = 3*X.^4 - X.^2 + 2*Y.^2 - 2*X + Y;
+surf(X,Y,Z)
+hold on
+plot(0.7666, -0.6421, 'ro')
+hold off
+title('f(x,y) = 3x^4 - x^2 + 2y^2 - 2x + y')
+
+
+f = [-150 -300];
+A = [15 35; 0.5 0; 0.1 0.3; 2 5];
+b = [800; 25; 75; 450];
+lb = [0 0];
+[x,fval,exitflag,output,lambda] = linprog(f, A, b, [], [], lb);
+disp(x)
+disp(output)
+A * x
+
+
+
