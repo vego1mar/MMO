@@ -1,0 +1,62 @@
+golden_sect_2(@f15, 0, 3, 10e-8, (sqrt(5)-1)/2, 0)
+golden_sect_2(@f15, 0, 3, 10e-8, 1/9, 0)
+golden_sect_2_plot(@f15, 0, 3, 10e-8, (sqrt(5)-1)/2, 0)
+golden_sect_2_plot(@f15, 0, 3, 10e-8, 1/9, 0)
+
+second_derivative = @(x) (-(((-6*x^2-8*x+16)^2)*((tan(2*x^3+4*x^2-16*x))^2)*((sec(2*x^3+4*x^2-16*x))^4))/((abs(tan(2*x^3+4*x^2-16*x)))^3)) + ((((-6*x^2-8*x+16)^2)*((sec(2*x^3+4*x^2-16*x))^4))/(abs(tan(2*x^3+4*x^2-16*x)))) + (((2*((-6*x^2-8*x+16)^2))*((tan(2*x^3+4*x^2-16*x))^2)*((sec(2*x^3+4*x^2-16*x))^2))/(abs(tan(2*x^3+4*x^2-16*x)))) - (((-12*x-8)*tan(2*x^3+4*x^2-16*x)*((sec(2*x^3+4*x^2-16*x))^2))/(abs(tan(2*x^3+4*x^2-16*x))));
+fplot(second_derivative, [-10, 10])
+
+syms x;
+g_sym = abs(tan(2*x^3+4*x^2-16*x));
+newton1d_2(g_sym, 0.000000072698232206780578223897870815072, 10e-6, 0)
+newton1d_2(g_sym, 2.9999999651541403118718380431346, 10e-6, 3)
+newton1d_2(g_sym, 1, 10e-6, 0)
+newton1d_2_plot(g_sym, 0.000000072698232206780578223897870815072, 10e-6, 0)
+newton1d_2_plot(g_sym, 2.9999999651541403118718380431346, 10e-6, 3)
+
+fplot(@f16, [-10, 10])
+title('g(x) = |tan(2x^3+4x^2-16x)|')
+hold on
+plot(1.0971675407098634533586703382372, f16(1.0971675407098634533586703382372), 'rx')
+hold off
+
+====================
+
+fn_volume = @(x) 4*x^3-48*x^2+140*x
+fplot(fn_volume, [-2, 10])
+title('V(x) = 4x^3 - 48x^2 + 140x')
+hold on
+plot(4-sqrt(13/3), fn_volume(4-sqrt(13/3)), 'rx')
+plot(4+sqrt(13/3), fn_volume(4+sqrt(13/3)), 'bo')
+fplot(0)
+hold off
+
+fn_volume = @(x) -(4*x^3-48*x^2+140*x);
+[x,fval,exitflag,output] = fminbnd(fn_volume, 0, 5)
+
+syms x;
+fn_volume = -(4*x^3-48*x^2+140*x);
+newton1d_2(fn_volume, 0, 10e-8, 4-sqrt(13/3))
+newton1d_2_plot(fn_volume, 0, 10e-8, 4-sqrt(13/3))
+fn_volume = @(x) 4*x^3-48*x^2+140*x;
+[xo,Ot,nS]=powell(fn_volume, [2], 1, [], 0, [], [], 10e-6, 300)
+
+plot(2, 7, 'bx')
+hold on
+title('{A, B, C, D, (x,y)}')
+plot(0, 1, 'bx')
+plot(9, 3, 'bx')
+plot(2, 6, 'bx')
+plot(3.25, 4.25, 'rx')
+hold off
+
+fn_loc = @(x) 4*x(1)^2+4*x(2)^2-26*x(1)-34*x(2)+184;
+[x0, Ot, nS] = powell(fn_loc, [0,0], 0, [], 0, [], [], 10e-8, 300)
+fn_loc = @(x) sqrt((2-x(1))^2+(7-x(2))^2)+sqrt(x(1)^2+(1-x(2))^2)+sqrt((9-x(1))^2+(3-x(2))^2)+sqrt((2-x(1))^2+(6-x(2))^2);
+fn_loc([x0(1), x0(2)])
+[x0, Ot, nS] = powell(fn_loc, [0,0], 0, [], 0, [], [], 10e-8, 300);
+disp(x0)
+disp(Ot)
+disp(nS)
+
+
